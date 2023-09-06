@@ -26,7 +26,7 @@ class Solution {
 
             for (int j = 0; j < partLength + (i < extra ? 1 : 0); j++) {
                 dup = dup.next = new ListNode(curr.val);
-                if (curr != null) curr = curr.next;
+                curr = curr.next;
             }
             
             ans[i] = head.next;

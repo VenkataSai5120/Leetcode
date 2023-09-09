@@ -11,10 +11,4 @@ WHERE (product_id, change_date) IN (
     FROM Products
     WHERE change_date <= '2019-08-16'
     GROUP BY product_id
-    # HAVING MAX(change_date) <= '2019-08-16'
 );
-
-# SELECT product_id, MAX(change_date)
-#     FROM Products
-#     WHERE change_date <= "2019-08-16"
-    # GROUP BY product_id;

@@ -5,7 +5,7 @@ class Solution {
         for (int[][] a : dp) {
             for (int[] b : a) Arrays.fill(b, -1);
         }
-        return findNums(num.toCharArray(), 0, 0, 0, digits, dp) - 1;
+        return findNums(num.toCharArray(), 0, 0, 0, digits, dp) - 1; // -1 to avoid zero
     }
 
     private int findNums(char[] num, int index, int decider, int prevDig, 

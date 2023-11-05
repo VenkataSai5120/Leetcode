@@ -11,12 +11,14 @@ public class Solution {
 
     public Pair dfs(List<Integer>[] tree, int[] values, int node, int parent){
         long leftout = 0, taken = 0;
+
         for (int c : tree[node]) {
             if (c == parent) continue;
             Pair result = dfs(tree, values, c, node);
             taken += result.first;
             leftout += result.second;
         }
+        
         taken += (leftout != 0) ? Math.max(leftout, (long)values[node]) : 0;
         leftout = (leftout != 0) ? Math.min(leftout, (long)values[node]) : values[node];
         return new Pair(taken, leftout);

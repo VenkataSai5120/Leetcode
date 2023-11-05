@@ -1,27 +1,17 @@
 public class Solution {
-    class Pair {
-        long first;
-        long second;
-
-        Pair(long first, long second) {
-            this.first = first;
-            this.second = second;
-        }
-    }
-
-    public Pair dfs(List<Integer>[] tree, int[] values, int node, int parent){
+    public Pair<Long, Long> dfs(List<Integer>[] tree, int[] values, int node, int parent){
         long leftout = 0, taken = 0;
 
-        for (int c : tree[node]) {
-            if (c == parent) continue;
-            Pair result = dfs(tree, values, c, node);
-            taken += result.first;
-            leftout += result.second;
+        for (int next : tree[node]) {
+            if (next == parent) continue;
+            Pair<Long, Long> result = dfs(tree, values, next, node);
+            taken += result.getKey();
+            leftout += result.getValue();
         }
-        
+
         taken += (leftout != 0) ? Math.max(leftout, (long)values[node]) : 0;
         leftout = (leftout != 0) ? Math.min(leftout, (long)values[node]) : values[node];
-        return new Pair(taken, leftout);
+        return new Pair<Long, Long>(taken, leftout);
     }
 
     public long maximumScoreAfterOperations(int[][] edges, int[] values) {
@@ -36,6 +26,6 @@ public class Solution {
             tree[e[1]].add(e[0]);
         }
 
-        return dfs(tree, values, 0, -1).first;
+        return dfs(tree, values, 0, -1).getKey();
     }
 }

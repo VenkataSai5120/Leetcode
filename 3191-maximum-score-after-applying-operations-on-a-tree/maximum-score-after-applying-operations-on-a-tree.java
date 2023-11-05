@@ -1,31 +1,33 @@
-public class Solution {
-    public Pair<Long, Long> dfs(List<Integer>[] tree, int[] values, int node, int parent){
-        long leftout = 0, taken = 0;
+class Solution {
+    public long maximumScoreAfterOperations(int[][] edges, int[] values) {
+        long overAllScore = 0;
+        int n = values.length;
+        List<List<Integer>> adj = new ArrayList<>();
 
-        for (int next : tree[node]) {
-            if (next == parent) continue;
-            Pair<Long, Long> result = dfs(tree, values, next, node);
-            taken += result.getKey();
-            leftout += result.getValue();
+        for (int i = 0; i < n; i++) {
+            overAllScore += values[i];
+            adj.add(new ArrayList<>());
         }
 
-        taken += (leftout != 0) ? Math.max(leftout, (long)values[node]) : 0;
-        leftout = (leftout != 0) ? Math.min(leftout, (long)values[node]) : values[node];
-        return new Pair<Long, Long>(taken, leftout);
+        for (int[] edge : edges) {
+            adj.get(edge[0]).add(edge[1]);
+            adj.get(edge[1]).add(edge[0]);
+        }
+
+        long leavingScore = findLeavingScore(adj, 0, -1, values);
+        return overAllScore - leavingScore;
     }
 
-    public long maximumScoreAfterOperations(int[][] edges, int[] values) {
-        int n = values.length;
-        List<Integer>[] tree = new ArrayList[n];
-        for (int i = 0; i < n; i++) {
-            tree[i] = new ArrayList<>();
+    private long findLeavingScore(List<List<Integer>> adj, int src, int par, int[] values) {
+        long score = 0;
+
+        for (int node : adj.get(src)) {
+            if (node != par) {
+                score += findLeavingScore(adj, node, src, values);
+            }
         }
 
-        for (int[] e : edges) {
-            tree[e[0]].add(e[1]);
-            tree[e[1]].add(e[0]);
-        }
-
-        return dfs(tree, values, 0, -1).getKey();
+        if (score == 0) return values[src];
+        return Math.min(values[src], score);
     }
 }

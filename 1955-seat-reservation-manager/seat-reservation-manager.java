@@ -1,19 +1,23 @@
 class SeatManager {
+    int marker;
     PriorityQueue<Integer> manager;
     public SeatManager(int n) {
-        this.manager = new PriorityQueue<Integer>();
-        for (int i = 1; i <= n; i++) this.manager.add(i);
+        marker = 1;
+        manager = new PriorityQueue<>();
     }
-    
+
     public int reserve() {
-        return this.manager.poll();
+        if (!manager.isEmpty()) {
+            return manager.poll();
+        }
+
+        return marker++;
     }
-    
+
     public void unreserve(int seatNumber) {
-        this.manager.add(seatNumber);
+        manager.offer(seatNumber);
     }
 }
-
 /**
  * Your SeatManager object will be instantiated and called as such:
  * SeatManager obj = new SeatManager(n);

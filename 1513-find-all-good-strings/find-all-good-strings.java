@@ -9,7 +9,7 @@ class Solution {
         next = new int[es.length];
         next[0] = -1;
         for (int i = 1, j = 0; i < es.length; i++) {
-            next[i] = es[i] == es[j] ? -1 : j;
+            next[i] = es[i] == es[j] ? next[j] : j;
             while (j >= 0 && es[i] != es[j]) j = next[j];
             j++;
         }

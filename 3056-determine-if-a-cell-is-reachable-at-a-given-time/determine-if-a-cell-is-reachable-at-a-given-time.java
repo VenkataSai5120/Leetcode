@@ -5,7 +5,6 @@ class Solution {
         int yDiff = Math.abs(targetY - startY);
         int xDiff = Math.abs(targetX - startX);
         int minDiff = Math.min(yDiff, xDiff);
-        // System.out.println(xDiff + " " + yDiff);
         
         yDiff -= minDiff;
         xDiff -= minDiff;

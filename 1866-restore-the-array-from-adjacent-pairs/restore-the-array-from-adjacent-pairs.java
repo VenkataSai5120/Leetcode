@@ -16,16 +16,17 @@ class Solution {
         }
 
         int[] result = new int[adj.size()];
-        dfs(adj, start, 1_000_000_007,result, 0);
+        findOrder(adj, start, 1_000_000_007,result, 0);
         return result;
     }
 
-    private void dfs(Map<Integer, List<Integer>> adj, int src, int par, int[] res, int index) {
+    private void findOrder(Map<Integer, List<Integer>> adj, 
+    int src, int par, int[] res, int index) {
         res[index] = src;
 
         for (int next : adj.getOrDefault(src, new ArrayList<>())) {
             if (next != par) {
-                dfs(adj, next, src, res, index + 1);
+                findOrder(adj, next, src, res, index + 1);
             }
         }
     }

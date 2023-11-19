@@ -4,7 +4,7 @@
 //         return find(max, 0, 0, a, b);
 //     }
     
-//     private int find(long long max, int index, long long res, long long a, long long b) {
+//     private int find(long max, int index, long res, long a, long b) {
 //         if (max <= 0) {
 //             System.out.println(res);
 //             return (int)(((a ^ res) * (b ^ res)) % 1_000_000_007);

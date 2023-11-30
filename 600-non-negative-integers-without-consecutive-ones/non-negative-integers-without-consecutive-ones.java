@@ -33,12 +33,12 @@ class Solution {
 
         StringBuilder sb = new StringBuilder(Integer.toBinaryString(n));
         String s = sb.toString();
-        int sz = (int) (Math.log(n) / Math.log(2)) + 1;
+        int size = (int) (Math.log(n) / Math.log(2)) + 1;
 
         while (sb.length() < 32) {
             sb.insert(0, '0');
         }
-        s = sb.substring(32 - sz);
+        s = sb.substring(32 - size);
 
         int ans = f(0, 0, 1, s);
         return ans;

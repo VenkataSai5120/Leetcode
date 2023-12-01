@@ -3,9 +3,9 @@ BEGIN
 SET N = N - 1;
   RETURN (
       # Write your MySQL query statement below.
-      SELECT DISTINCT(salary) 
+      IFNULL((SELECT DISTINCT(salary) 
       FROM Employee 
       ORDER BY salary DESC
-      LIMIT N , 1
+      LIMIT N , 1), NULL)
   );
 END

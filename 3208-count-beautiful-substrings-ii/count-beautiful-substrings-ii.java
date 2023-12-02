@@ -15,7 +15,8 @@ class Solution {
                 vowelsAfter[i + 1] = vowelsAfter[i];
             }
         }
-        final int multiples = computeMultiples(k); // sqrt(m)
+        final int multiples = computeMultiples(k);
+        
         final int step = (multiples << 1);
         long answer = 0;
         for (int i = 0; i < s.length(); ++i) {

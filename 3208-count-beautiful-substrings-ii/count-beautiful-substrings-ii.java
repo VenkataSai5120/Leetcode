@@ -44,10 +44,9 @@ class Solution {
                 changed = true;
             }
             if (changed && !isSquare(squared)) {
-                squared *= factor; // each prime factor must have even power
+                squared *= factor;
             }
         }
-        // remainder effectively squared as well to have even power
         return remainder * (int) Math.sqrt(squared);
     }
 

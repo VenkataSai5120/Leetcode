@@ -1,6 +1,6 @@
 class Solution {
     public int intersectionSizeTwo(int[][] intervals) {
-        Arrays.sort(intervals, (a, b) -> a[1] == b[1] ? b[0] - a[0] : a[1] - b[1]);
+        Arrays.sort(intervals, (a, b) -> a[1] - b[1]);
         int last = intervals[0][1];
         int secondLast = intervals[0][1] - 1;
         int size = 2;

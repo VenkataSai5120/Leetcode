@@ -3,7 +3,7 @@ class Solution {
         int index = -1;
 
         for (int i = num.length() - 1; i >= 0; i--) {
-            if (Character.getNumericValue(num.charAt(i)) % 2 == 1) {
+            if ((num.charAt(i) - '0') % 2 == 1) {
                 index = i;
                 break;
             }

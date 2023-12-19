@@ -6,6 +6,10 @@ class Solution {
 
     while (l <= r) {
       int m = (l + r) / 2;
+      if (nums[l] <= nums[r]) {
+          res = Math.min(res, nums[l]);
+          break;
+      }
       if (nums[l] <= nums[m]) {
           res = Math.min(res, nums[l]);
           l = m + 1;

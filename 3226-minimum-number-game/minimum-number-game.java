@@ -1,5 +1,3 @@
-import java.util.PriorityQueue;
-
 public class Solution {
     public int[] numberGame(int[] nums) {
         PriorityQueue<Integer> pq = new PriorityQueue<>();

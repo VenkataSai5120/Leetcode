@@ -1,6 +1,7 @@
 class Solution {
     public int minOperations(String s) {
-        return Math.min(findMinOps(s.toCharArray(), 0), findMinOps(s.toCharArray(), 1));
+        int res1 = findMinOps(s.toCharArray(), 0);
+        return Math.min(res1, s.length() - res1);
     }
 
     private int findMinOps(char[] arr, int curr) {
@@ -11,7 +12,6 @@ class Solution {
             curr = 1 - curr;
         }
 
-        return ops
-        ;
+        return ops;
     }
 }

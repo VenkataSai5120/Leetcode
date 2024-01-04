@@ -20,6 +20,8 @@ class Solution {
 
         if (a < b) return maximumScore(b, a, c);
         if (b < c) return maximumScore(a, c, b);
-        return b == 0 ? 0 : 1 + maximumScore(a - 1, b - 1, c);
+        if (b == 0) return 0;
+        int val = Math.max(1, b - c);
+        return val + maximumScore(a - val, b - val, c);
     }
 }

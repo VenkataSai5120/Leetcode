@@ -1,22 +1,19 @@
 class Solution {
-    public int lengthOfLIS(int[] nums) {
-        if (nums == null || nums.length == 0) {
-            return 0;
-        } 
-        int n = nums.length;
-        int[] dp = new int[n];
-        dp[0] = 1;
-        int max = 1;
-        for (int i = 1; i < n; i++) {
-            int prevMax = 0;
-            for (int j = 0; j < i; j++) {
-                if (nums[i] > nums[j]) {
-                    prevMax = Math.max(dp[j], prevMax);
-                }
-            }
-            dp[i] = prevMax + 1;
-            max = Math.max(dp[i], max);
-        }
-        return max;
+    public int lengthOfLIS(int[] arr) {
+        int n = arr.length;
+		int[][] dp = new int[n][n + 1];
+		for (int[] a : dp) Arrays.fill(a, -1);
+		return findLongest(arr, 0, -1, dp);
     }
+
+    private static int findLongest(int[] arr, int ind, int prevInd, int[][] dp) {
+		if (ind == arr.length) return 0;
+		if (dp[ind][prevInd + 1] != -1) return dp[ind][prevInd + 1];
+		int notTake = findLongest(arr, ind + 1, prevInd, dp);
+        int take = 0;
+		if (prevInd == -1 || arr[ind] > arr[prevInd]) {
+			take = 1 + findLongest(arr, ind + 1, ind, dp);
+		}
+		return dp[ind][prevInd + 1] = Math.max(take, notTake);
+	}
 }

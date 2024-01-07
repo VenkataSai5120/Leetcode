@@ -1,11 +1,11 @@
 class Solution {
-    public int minCapability(int[] A, int k) {
-        int left = 1 , right = Arrays.stream(A).max().orElse(Integer.MIN_VALUE);
-        int n = A.length;
+    public int minCapability(int[] nums, int k) {
+        int left = 1 , right = Arrays.stream(nums).max().orElse(Integer.MIN_VALUE);
+        int n = nums.length;
         while (left < right) {
             int mid = (left + right) / 2, take = 0;
             for (int i = 0; i < n; ++i)
-                if (A[i] <= mid) {
+                if (nums[i] <= mid) {
                     take += 1;
                     i++;
                 }

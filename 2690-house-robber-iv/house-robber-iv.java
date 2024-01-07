@@ -1,19 +1,26 @@
 class Solution {
     public int minCapability(int[] nums, int k) {
-        int left = 1 , right = Arrays.stream(nums).max().orElse(Integer.MIN_VALUE);
+        int low = Arrays.stream(nums).min().orElse((int)1e9);
+        int high = Arrays.stream(nums).max().orElse(-(int)1e9);
         int n = nums.length;
-        while (left < right) {
-            int mid = (left + right) / 2, take = 0;
-            for (int i = 0; i < n; ++i)
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+            int housesRobbed = 0;
+            
+            for (int i = 0; i < n; i++) {
                 if (nums[i] <= mid) {
-                    take += 1;
+                    housesRobbed++;
                     i++;
                 }
-            if (take >= k)
-                right = mid;
-            else
-                left = mid + 1;
+            }
+
+            if (housesRobbed >= k) {
+                high = mid - 1;
+            }
+            else low = mid + 1;
         }
-        return left;
+
+        return low;
     }
 }

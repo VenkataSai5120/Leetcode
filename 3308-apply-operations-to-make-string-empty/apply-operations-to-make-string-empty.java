@@ -9,8 +9,6 @@ class Solution {
             fre[c - 'a']++;
         }
 
-        System.out.println(Arrays.toString(fre));
-
         for (int i = 0; i < 26; i++) {
             if (fre[i] == 0) {
                 continue;
@@ -24,8 +22,6 @@ class Solution {
                 lastChars.add((char)(i + 'a'));
             }
         }
-
-        System.out.println(lastChars);
 
         for (int i = s.length() - 1; i >= 0; i--) {
             char c = s.charAt(i);

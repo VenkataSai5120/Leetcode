@@ -19,15 +19,9 @@ class Solution {
 
         int nextGen = countAlive(board, i, j, m, n);
         changeState(board, i, j + 1, m, n);
-        if (board[i][j] == 1) {
-            if (nextGen < 2 || nextGen > 3) {
-                board[i][j] = 0;
-            }
-            else if (nextGen == 3 || nextGen == 2){
-                board[i][j] = 1;
-            }
-        }
-        else if (nextGen == 3) {
+        if (nextGen > 3 || nextGen < 2) {
+            board[i][j] = 0;
+        } else if (nextGen == 3) {
             board[i][j] = 1;
         }
     }

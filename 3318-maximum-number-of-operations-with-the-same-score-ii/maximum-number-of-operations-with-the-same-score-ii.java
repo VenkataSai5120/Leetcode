@@ -14,19 +14,23 @@ class Solution {
             return 0;
         }
         String key = i + ", " + j;
-        if (!dp.containsKey(key)) {
-            int max = 0;
-            if (score == nums[i] + nums[i + 1]) {
-                max = Math.max(max, 1 + findMaxOperations(nums, i + 2, j, score, dp));
-            }
-            if (score == nums[i] + nums[j]) {
-                max = Math.max(max, 1 + findMaxOperations(nums, i + 1, j - 1, score, dp));
-            }
-            if (score == nums[j - 1] + nums[j]) {
-                max = Math.max(max, 1 + findMaxOperations(nums, i, j - 2, score, dp));
-            }
-            dp.put(key, max);
+
+        if (dp.containsKey(key)) return dp.get(key);
+
+        int max = 0;
+        
+        if (score == nums[i] + nums[i + 1]) {
+            max = Math.max(max, 1 + findMaxOperations(nums, i + 2, j, score, dp));
         }
+        if (score == nums[i] + nums[j]) {
+            max = Math.max(max, 1 + findMaxOperations(nums, i + 1, j - 1, score, dp));
+        }
+        if (score == nums[j - 1] + nums[j]) {
+            max = Math.max(max, 1 + findMaxOperations(nums, i, j - 2, score, dp));
+        }
+
+        dp.put(key, max);
+        
         return dp.get(key);
     }
 }

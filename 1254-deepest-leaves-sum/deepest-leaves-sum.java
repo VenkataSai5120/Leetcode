@@ -18,7 +18,7 @@ class Solution {
     int leaveSum = 0;
 
     public int deepestLeavesSum(TreeNode root) {
-        findDeepestLeaveSum(root, 1, null);
+        findDeepestLeaveSum(root, 0, null);
         return leaveSum / 2;
     }
 

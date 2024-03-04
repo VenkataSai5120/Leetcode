@@ -1,21 +1,25 @@
 class Solution {
     public int numberOfSets(int n, int maxDistance, int[][] roads) {
-        int res = 0;
+        int count = 0;
 
-        for (int i = 1; i < (1 << n); i++) {
-            List<Integer> connected = new ArrayList<>();
+        for (int i = 1; i <= (1 << n); i++) {
+            List<Integer> branches = new ArrayList<>();
             int[][] dist = new int[n][n];
 
-            for (int[] a : dist) Arrays.fill(a, (int)1e9);
+            for (int[] arr : dist) Arrays.fill(arr, (int)1e9);
 
             for (int j = 0; j < n; j++) {
-                if ((i & (1 << j)) != 0) connected.add(j);
+                if ((i & (1 << j)) != 0) {
+                    branches.add(j);
+                }
+                dist[j][j] = 0;
             }
 
-            for (int j = 0; j < n; j++) dist[j][j] = 0;
+            
 
             for (int[] road : roads) {
                 int u = road[0], v = road[1], d = road[2];
+
                 if ((i & (1 << u)) != 0 && (i & (1 << v)) != 0) {
                     dist[u][v] = dist[v][u] = Math.min(d, dist[u][v]);
                 }
@@ -31,18 +35,22 @@ class Solution {
 
             int isFeasible = 1;
 
-            for (int v1 : connected) {
-                for (int v2 : connected) {
-                    if (dist[v1][v2] > maxDistance) {
+            for (int u : branches) {
+                for (int v : branches) {
+                    if (dist[u][v] > maxDistance) {
                         isFeasible = 0;
                         break;
                     }
                 }
             }
 
-            res += isFeasible;
-        }   
+            if (isFeasible == 1) {
+                System.out.println(branches);
+            }
 
-        return res + 1;
+            count += isFeasible;
+        }
+
+        return count;
     }
 }

@@ -17,8 +17,6 @@ class Solution {
             while (first < last && s.charAt(last) == c2) {
                 last--;
             }
-
-            // System.out.println(s.substring(first, last + 1));
         }
 
         return last - first + 1;

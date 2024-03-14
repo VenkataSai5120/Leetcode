@@ -4,21 +4,18 @@ class Solution {
         int len = n.length();
 
         if (num <= 10 || (n.charAt(0) == '1' && num % 10 == 0 && Long.parseLong(n.substring(1)) == 0)) {
-            System.out.println(1);
             return "" + (num - 1);
         }
 
         if (num == 11 || 
         (num % 10 == 1 && (n.charAt(0) == '1' && Long.parseLong(n.substring(1, len - 1)) == 0))) {
-            System.out.println(2);
             return "" + (num - 2);
         }
 
         if (isAllNineDigits(n)) {
-            System.out.println(3);
             return ""  + (num + 2);
         }
-        System.out.println(4);
+        
         boolean isEvenDigits = n.length() % 2 == 0 ? true : false;
         String palinRootStr = isEvenDigits ? n.substring(0, len / 2) : n.substring(0, len / 2 + 1);
         long palinRootNum= Long.parseLong(palinRootStr);

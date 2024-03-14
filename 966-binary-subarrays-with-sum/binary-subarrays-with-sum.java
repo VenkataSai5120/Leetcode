@@ -1,17 +1,25 @@
 class Solution {
     public int numSubarraysWithSum(int[] nums, int goal) {
-        return atMost(nums, goal) - atMost(nums, goal - 1);
+        return findAtMostSum(nums, goal) - findAtMostSum(nums, goal - 1);
     }
-    private int atMost(int[] nums, int goal) {
-        int head, tail = 0, sum = 0, result = 0;
-        for (head = 0; head < nums.length; head++) {
+
+    private int findAtMostSum(int[] nums, int goal) {
+        int sum = 0;
+        int res = 0;
+        int head = 0, tail = 0;
+
+        while (head < nums.length) {
             sum += nums[head];
+            
             while (sum > goal && tail <= head) {
                 sum -= nums[tail];
                 tail++;
             }
-            result += head - tail + 1;
+
+            res += head - tail + 1;
+            head++;
         }
-        return result;
+
+        return res;
     }
 }

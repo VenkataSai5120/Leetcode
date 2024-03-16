@@ -10,12 +10,12 @@ class Solution {
                 low++;
                 high--;
             }
-            // else if (nums[mid] == nums[low]) {
-            //     low++;
-            // }
-            // else if (nums[mid] == nums[high]) {
-            //     high--;
-            // }
+            else if (nums[mid] == nums[low]) {
+                low++;
+            }
+            else if (nums[mid] == nums[high]) {
+                high--;
+            }
             else if (nums[low] <= nums[mid]) {
                 if (nums[low] <= target && nums[mid] > target) high = mid - 1;
                 else low = mid + 1;

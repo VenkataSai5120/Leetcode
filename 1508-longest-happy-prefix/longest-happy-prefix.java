@@ -2,7 +2,6 @@ class Solution {
     public String longestPrefix(String s) {
         int n = s.length();
         int[] kmp = new int[n + 1];
-        // int i = 1, j = 0;
 
         for (int i = 1, j = 0; i < s.length();)
         if (s.charAt(i) == s.charAt(j)) 

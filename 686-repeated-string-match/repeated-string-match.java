@@ -1,5 +1,4 @@
 class Solution {
-    int mod = 100000;
     public int repeatedStringMatch(String a, String b) {
         if (a.equals(b)) return 1;
         int countRep = 1;
@@ -10,33 +9,50 @@ class Solution {
             countRep++;
         }
 
+        int[] lps = findLPS(b);
+
         if (src.equals(b)) return countRep;
-        if (searchPattern(src, b)) return countRep;
-        if (searchPattern(src + a, b)) return countRep + 1;
+        if (searchPattern(src, b, lps)) return countRep;
+        if (searchPattern(src + a, b, lps)) return countRep + 1;
         return -1;
     }
-    private boolean searchPattern(String src, String tar) {
-        int n = src.length(), m = tar.length();
-        int currHash = 0;
-        int targetHash = 0;
-        int rollingPow = 1;
 
-        for (int i = 0; i < m; i++) rollingPow = (rollingPow * 26) % mod;
+    private boolean searchPattern(String a, String b, int[] lps) {
+        int i = 0, j = 0;
 
-        for (int i = 0; i < m; i++) targetHash = (targetHash * 26 + tar.charAt(i)) % mod;
-
-        for (int i = 0; i < n; i++) {
-            currHash = (currHash * 26 + src.charAt(i)) % mod;
-            if (i < m - 1) continue;
-            if (i >= m) currHash = (currHash - src.charAt(i - m) * rollingPow) % mod;
-            // System.out.println(currHash);
-            if (currHash < 0) currHash += mod;
-            if (targetHash == currHash) {
-                if (src.substring(i - m + 1, i + 1).equals(tar)) return true;
+        while (i < a.length() && j < b.length()) {
+            if (a.charAt(i) == b.charAt(j)) {
+                i++;
+                j++;
+            } else {
+                if (j != 0) {
+                    j = lps[j - 1];
+                } else {
+                    i++;
+                }
             }
         }
 
-        return false;
+        return j == b.length();
     }
 
+    private int[] findLPS(String s) {
+        int[] lps = new int[s.length()];
+        int i = 1, j = 0;
+
+        while (i < s.length()) {
+            if (s.charAt(i) == s.charAt(j)) {
+                lps[i] = j + 1;
+                i++;
+                j++;
+            } else {
+                if (j != 0) {
+                    j = lps[j - 1];
+                } else {
+                    i++;
+                }
+            }
+        }
+        return lps;
+    }
 }

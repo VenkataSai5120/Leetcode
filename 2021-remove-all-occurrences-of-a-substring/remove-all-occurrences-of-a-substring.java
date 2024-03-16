@@ -3,6 +3,7 @@ class Solution {
         Stack<Character> st = new Stack<>();
         int n = s.length();
         int m = part.length();
+        
         for (int i = 0; i < n; i++) {
             st.push(s.charAt(i));
             if (st.size() >= m) {

@@ -18,7 +18,7 @@ class Solution {
                 vis.add(curr);
                 if (flag == 1 && (curr - b >= 0)) q.offer(new int[]{curr - b, 0});
 
-                if ((curr - b) <= 2000) q.offer(new int[]{curr + a, 1});
+                if ((curr + a) <= 10000) q.offer(new int[]{curr + a, 1});
             }
             ans++;
         }

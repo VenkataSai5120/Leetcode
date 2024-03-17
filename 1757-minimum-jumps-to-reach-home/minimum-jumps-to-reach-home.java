@@ -11,6 +11,7 @@ class Solution {
         int minJumps = 0;
         Queue<int[]> q = new LinkedList<>();
         q.add(new int[] {0, 1});
+        vis.add(0);
 
         while (!q.isEmpty()) {
             int size = q.size();
@@ -24,18 +25,20 @@ class Solution {
                     return minJumps;
                 }
 
-                if (vis.contains(pos)) {
-                    continue;
-                }
+                // if (vis.contains(pos)) {
+                //     continue;
+                // }
 
-                vis.add(pos);
+                // vis.add(pos);
 
-                if (pos - b >= 0 && flag == 1) {
+                if (pos - b >= 0 && flag == 1 && !vis.contains(pos - b)) {
                     q.add(new int[] {pos - b, 0});
+                    vis.add(pos - b);
                 }
 
-                if (pos - b <= 2000) {
+                if (pos - b <= 2000 && !vis.contains(pos + a)) {
                     q.add(new int[] {pos + a, 1});
+                    vis.add(pos + a);
                 }
             }
 

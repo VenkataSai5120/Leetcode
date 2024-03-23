@@ -16,11 +16,7 @@
 class Solution {
     public boolean isCousins(TreeNode root, int x, int y) {
         int[] depthAndParA = findDepthAndPar(root, x, -1);
-        // System.out.println(depthAndParA.length);
         int[] depthAndParB = findDepthAndPar(root, y, -1);
-        // System.out.println(depthAndParB.length);
-        System.out.println(Arrays.toString(depthAndParA));
-        System.out.println(Arrays.toString(depthAndParB));
 
         if (depthAndParA[0] == depthAndParB[0] && depthAndParA[1] != depthAndParB[1]) {
             return true;

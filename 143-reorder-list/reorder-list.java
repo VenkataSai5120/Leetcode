@@ -12,8 +12,8 @@ class Solution {
     public void reorderList(ListNode head) {
         ListNode mid = findMid(head);
         ListNode first = head, second = mid.next;
-        second = reverse(second);
         mid.next = null;
+        second = reverse(second);
         head = new ListNode(0);
         ListNode temp = head;
 
@@ -48,7 +48,7 @@ class Solution {
     }
 
     public ListNode findMid(ListNode node) {
-        ListNode slow = node, fast = node;
+        ListNode slow = node, fast = node.next;
 
         while (fast != null && fast.next != null) {
             slow = slow.next;

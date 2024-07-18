@@ -35,7 +35,7 @@ class Solution {
         int[] rightDistances = dfs(node.right, distance);
 
         for (int l = 1; l < distance; l++) {
-            for (int r = distance - 1; r >= 0; r--) {
+            for (int r = distance; r >= 0; r--) {
                 if (l + r <= distance) {
                     result += leftDistances[l] * rightDistances[r];
                 }

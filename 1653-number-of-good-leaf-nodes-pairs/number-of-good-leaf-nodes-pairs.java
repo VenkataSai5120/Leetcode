@@ -43,7 +43,7 @@ class Solution {
         }
         
         int[] res = new int[distance + 1];
-        for (int i = res.length - 2; i >= 1; i--) {
+        for (int i = 0; i <= res.length - 2; i++) {
             res[i + 1] = leftDistances[i] + rightDistances[i];
         }
 

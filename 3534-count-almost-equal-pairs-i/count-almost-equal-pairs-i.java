@@ -14,18 +14,18 @@ class Solution {
         }
 
         int diff = 0;
-        Map<Character, Integer> mp1 = new HashMap<>();
-        Map<Character, Integer> mp2 = new HashMap<>();
+        int[] fre1 = new int[10];
+        int[] fre2 = new int[10];
 
         for (int i = 0; i < n; i++) {
             if (s1.charAt(i) != s2.charAt(i)) {
                 diff++;
             }
-            mp1.put(s1.charAt(i), mp1.getOrDefault(s1.charAt(i), 0) + 1);
-            mp2.put(s2.charAt(i), mp2.getOrDefault(s2.charAt(i), 0) + 1);
+            fre1[s1.charAt(i) - '0']++;
+            fre2[s2.charAt(i) - '0']++;
         }
 
-        return diff <= 2 && mp1.equals(mp2);
+        return diff <= 2 && Arrays.equals(fre1, fre2);
     }
 
     public int countPairs(int[] nums) {

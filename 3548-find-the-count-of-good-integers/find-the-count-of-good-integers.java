@@ -42,7 +42,7 @@ class Solution {
             long curr = fr[i];
             str.append((char) ('a' + curr));
 
-            if (curr != 0) tot /= fact.get((int) curr);
+            tot /= fact.get((int) curr);
         }
 
         if (vis.containsKey(str.toString())) // Don't count numbers with the same digit frequency multiple times.
@@ -58,7 +58,7 @@ class Solution {
         for (int i = 1; i < fr.length; ++i) {
             long curr = fr[i];
 
-            if (curr != 0) a /= fact.get((int) curr);
+            a /= fact.get((int) curr);
         }
 
         long res = tot - a;
@@ -111,6 +111,8 @@ class Solution {
             curr = curr * i;
             fact.add(curr);
         }
+
+        System.out.println(fact);
 
         if (n % 2 == 1) { // When n is odd, generate numbers of length (n/2 + 1).
             len = n / 2 + 1;

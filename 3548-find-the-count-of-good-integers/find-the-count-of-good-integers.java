@@ -10,7 +10,7 @@ class Solution {
         vis = new HashMap<>();
     }
 
-    String genpal(long num, long val) { // Generating palindrome corresponding to the first half generated.
+    String genpal(long num, long val) { 
         String s = Long.toString(num);
         String t = s.substring(0, (int) val);
         StringBuilder sb = new StringBuilder(t);
@@ -19,12 +19,12 @@ class Solution {
         return s;
     }
 
-    boolean check(String s, int k) { // Divisibility check.
+    boolean check(String s, int k) {
         long val = Long.parseLong(s);
         return val % k == 0;
     }
 
-    long count(String s) { // Using basic combinatorics to count all combinations.
+    long count(String s) { 
         long[] fr = new long[10];
         long n = s.length();
 
@@ -36,16 +36,15 @@ class Solution {
         }
 
         long tot = fact.get((int) n);
-        StringBuilder str = new StringBuilder(); // Digit frequency string.
+        StringBuilder str = new StringBuilder();
 
         for (int i = 0; i < fr.length; ++i) {
             long curr = fr[i];
             str.append((char) ('a' + curr));
-
             tot /= fact.get((int) curr);
         }
 
-        if (vis.containsKey(str.toString())) // Don't count numbers with the same digit frequency multiple times.
+        if (vis.containsKey(str.toString())) 
             return 0;
 
         vis.put(str.toString(), 1);
@@ -57,7 +56,6 @@ class Solution {
 
         for (int i = 1; i < fr.length; ++i) {
             long curr = fr[i];
-
             a /= fact.get((int) curr);
         }
 
@@ -65,19 +63,19 @@ class Solution {
         return res;
     }
 
-    void find(int pos, int num, int len, int stat, int k) { // Generating all numbers of length len.
+    void find(int pos, int num, int len, int stat, int k) {
         if (pos == len) {
             long val;
 
-            if (stat == 1) // stat = 0 => even n || stat = 1 => n is odd
+            if (stat == 1)
                 val = len - 1;
             else
                 val = len;
 
-            String s = genpal(num, val); // Generating palindrome.
-            boolean st = check(s, k); // Check divisibility by k
+            String s = genpal(num, val); 
+            boolean st = check(s, k);
 
-            if (st) // If yes, count all possible combinations
+            if (st)
                 ans += count(s);
 
             return;
@@ -107,17 +105,17 @@ class Solution {
         fact.add(1L);
         long curr = 1;
 
-        for (long i = 1; i <= 11; ++i) { // Corrected pre-computing factorial values for faster calculation.
+        for (long i = 1; i <= 11; ++i) {
             curr = curr * i;
             fact.add(curr);
         }
 
         System.out.println(fact);
 
-        if (n % 2 == 1) { // When n is odd, generate numbers of length (n/2 + 1).
+        if (n % 2 == 1) {
             len = n / 2 + 1;
             stat = 1;
-        } else { // When n is even, generate numbers of length n/2.
+        } else {
             len = n / 2;
             stat = 0;
         }

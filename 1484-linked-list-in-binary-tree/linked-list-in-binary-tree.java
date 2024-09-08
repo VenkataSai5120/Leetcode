@@ -25,28 +25,14 @@
  */
 class Solution {
     public boolean isSubPath(ListNode head, TreeNode root) {
-        return find(head, head, root);
+        if (head == null) return true;
+        if (root == null) return false;
+        return dfs(head, root) || isSubPath(head, root.left) || isSubPath(head, root.right);
     }
 
-    private boolean find(ListNode head, ListNode curr, TreeNode root) {
-        if (curr == null) {
-            return true;
-        }
-
-        if (root == null) {
-            return false;
-        }
-
-        if (root.val == curr.val) {
-            curr = curr.next;
-        }
-        else if (root.val == head.val) {
-            head = head.next;
-        }
-        else {
-            curr = head;
-        }
-
-        return find(head, curr, root.left) || find(head, curr, root.right);
+    private boolean dfs(ListNode head, TreeNode root) {
+        if (head == null) return true;
+        if (root == null) return false;
+        return head.val == root.val && (dfs(head.next, root.left) || dfs(head.next, root.right));
     }
 }

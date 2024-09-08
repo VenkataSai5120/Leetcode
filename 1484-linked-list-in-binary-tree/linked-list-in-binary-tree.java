@@ -1,25 +1,52 @@
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode() {}
+ *     ListNode(int val) { this.val = val; }
+ *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
+ * }
+ */
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode() {}
+ *     TreeNode(int val) { this.val = val; }
+ *     TreeNode(int val, TreeNode left, TreeNode right) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
 class Solution {
     public boolean isSubPath(ListNode head, TreeNode root) {
+        return find(head, head, root);
+    }
+
+    private boolean find(ListNode head, ListNode curr, TreeNode root) {
+        if (curr == null) {
+            return true;
+        }
+
         if (root == null) {
             return false;
         }
-        
-        // Check if the path starts at the current root node or its children
-        return dfs(head, root) || isSubPath(head, root.left) || isSubPath(head, root.right);
-    }
 
-    // This function checks if a path matching the linked list exists starting at the given tree node
-    private boolean dfs(ListNode head, TreeNode root) {
-        if (head == null) {
-            return true; // Reached the end of the linked list, path found
+        if (root.val == curr.val) {
+            curr = curr.next;
         }
-        if (root == null) {
-            return false; // Reached the end of the tree but the list is not yet fully matched
+        else if (root.val == head.val) {
+            head = head.next;
         }
-        // Check if the current values match and continue the search downwards
-        if (root.val == head.val) {
-            return dfs(head.next, root.left) || dfs(head.next, root.right);
+        else {
+            curr = head;
         }
-        return false; // Values don't match, this path is invalid
+
+        return find(head, curr, root.left) || find(head, curr, root.right);
     }
 }

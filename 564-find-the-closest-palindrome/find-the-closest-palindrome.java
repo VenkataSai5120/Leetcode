@@ -3,7 +3,7 @@ class Solution {
         long num = Long.parseLong(n);
         int len = n.length();
 
-        if (num <= 10 || (n.charAt(0) == '1' && num % 10 == 0 && Long.parseLong(n.substring(1)) == 0)) {
+        if (num <= 10 || (n.charAt(0) == '1' &&  Long.parseLong(n.substring(1)) == 0)) {
             return "" + (num - 1);
         }
 

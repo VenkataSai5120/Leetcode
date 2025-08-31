@@ -29,9 +29,11 @@ class Solution {
             return null;
         }
 
+        System.out.println(postIndex);
+
         TreeNode root = new TreeNode(postorder[postIndex]);
         int index = map.get(postorder[postIndex]);
-        root.left = construct(postIndex - 1 - (inEnd - index), inStart, index - 1, inorder, postorder, map);
+        root.left = construct(postIndex - 1 + index - inEnd, inStart, index - 1, inorder, postorder, map);
         root.right = construct(postIndex - 1, index + 1, inEnd, inorder, postorder, map);
 
         return root;
